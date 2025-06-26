@@ -1248,3 +1248,23 @@ npm will default some values based on package contents.
 * [npm install](/commands/npm-install)
 * [npm publish](/commands/npm-publish)
 * [npm uninstall](/commands/npm-uninstall)
+* import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: "YOUR_API_KEY_HERE"
+});
+
+async function askBot(question) {
+  const response = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [{ role: "user", content: question }],
+  });
+  return response.choices[0].message.content;
+}
+
+// דוגמה לשימוש
+(async () => {
+  const answer = await askBot("מה זה בינה מלאכותית?");
+  console.log("תשובת הבוט:", answer);
+})();
+
